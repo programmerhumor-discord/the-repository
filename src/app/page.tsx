@@ -1,5 +1,4 @@
 import { DestroyButton } from "@/components/DestroyButton";
-import Image from "next/image";
 
 export default function Home() {
 	return (
@@ -10,16 +9,13 @@ export default function Home() {
 			</p>
 			<div className="divider">ANTI-REDDIT</div>
 			<section>
-				<Image
-					src="https://www.redditinc.com/assets/images/site/reddit-logo.png"
-					alt="reddit-logo"
-					width={64}
-					height={64}></Image>
-				<div>
-					<h3>WE HATE REDDIT!</h3>
-					<h3>LETS GOOOOOOOO!</h3>
-					<h3>YEAH!!! FUCK REDDIT</h3>
-				</div>
+				<code>
+					<pre>
+						<h3>WE HATE REDDIT!</h3>
+						<h3>LETS GOOOOOOOO!</h3>
+						<h3>YEAH!!! FUCK REDDIT</h3>
+					</pre>
+				</code>
 			</section>
 			<DestroyButton />
 		</>

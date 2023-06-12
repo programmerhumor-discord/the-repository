@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 
@@ -50,7 +51,15 @@ export default function RootLayout({
 						</Link>
 					</div>
 				</div>
-				<h1 className="text-7xl font-black">the-repository</h1>
+				<h1 className="text-7xl font-black">
+					the-repository
+					<Image
+						src="https://www.redditinc.com/assets/images/site/reddit-logo.png"
+						alt="reddit-logo"
+						className="ml-2 inline"
+						width={64}
+						height={64}></Image>
+				</h1>
 				<main className="flex flex-col gap-3">{children}</main>
 			</body>
 		</html>

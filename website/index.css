@@ -1,0 +1,22 @@
+.cross {
+    position: absolute;
+    top: 85px;
+    left: 250px;
+}
+
+.cross div {
+    width: 30px;
+    height: 500px;
+    background: #F00;
+    border: 3px solid #000;
+}
+
+.cross-1 {
+    position: absolute;
+    transform: rotate(45deg);
+}
+
+.cross-2 {
+    position: absolute;
+    transform: rotate(-45deg);
+}

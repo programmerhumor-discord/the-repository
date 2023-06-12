@@ -5,8 +5,29 @@ module.exports = {
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}"
 	],
-	theme: {
-		extend: {}
+	daisyui: {
+		themes: [
+			{
+				theme: {
+					"primary": "rgb(0, 119, 255)",
+					"secondary": "#d926a9",
+					"accent": "#FF5700",
+					"neutral": "#213e63",
+					"base-100": "#0e1218",
+					"info": "#3abff8",
+					"success": "#36d399",
+					"warning": "#fbbd23",
+					"error": "#f87272"
+				}
+			}
+		]
 	},
-	plugins: []
+	theme: {
+		extend: {
+			fontFamily: {
+				sans: "'Inter', 'Roboto', sans-serif"
+			}
+		}
+	},
+	plugins: [require("daisyui")]
 };

@@ -11,6 +11,7 @@ By accessing this repository through `git` you can earn MLM benchmarks.
 To:
 > - `D-u-c-k-s-e-l`
 > - `programmerhumor-discord`
+> - `EpicZombieSlayer` (he didn't do anything i just thought it would be funny to credit him)
 > - For watching.
 
 ## NAV

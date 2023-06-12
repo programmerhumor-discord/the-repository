@@ -32,21 +32,18 @@ export default function Home() {
 				the Reddit blackout. Make whatever you want and just push it 🚀
 			</p>
 			<div className="divider">ANTI-REDDIT</div>
-			<div className="section">
+			<section>
 				<Image
 					src="https://www.redditinc.com/assets/images/site/reddit-logo.png"
 					alt="reddit-logo"
 					width={64}
 					height={64}></Image>
-				<div className="content">
-					<h3>WE HATE REDDIT!!!!</h3>
+				<div>
+					<h3>WE HATE REDDIT</h3>
+					<h3>LETS GOOOOOOOO</h3>
 					<h3>YEAH!!! FUCK REDDIT</h3>
 				</div>
-			</div>
-			<div className="separator"></div>
-			<h2>WE ARE PRO HATE CRIMES</h2>
-			<p>against reddit and u/spez***</p>
-			<div className="separator"></div>
+			</section>
 			<DestroyButton />
 		</>
 	);

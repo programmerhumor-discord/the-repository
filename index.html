@@ -42,7 +42,6 @@ body {
 	width: 100%;
 	height: 100vh;
 	box-sizing: border-box;
-	padding: 24px;
 	align-items: center;
     background: #0e1218;
     color: white;
@@ -80,6 +79,8 @@ h2{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    box-sizing: border-box;
+	padding: 24px;
 }
 .separator{
     width: 100%;
@@ -127,6 +128,11 @@ button:hover{
 button:active{
     background: rgb(18, 75, 141);
 }
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
     </style>
 </head>
 <body>
@@ -142,7 +148,7 @@ button:active{
         <div class="separator"></div>
         <div class="section">
             <img src="https://www.redditinc.com/assets/images/site/reddit-logo.png" alt="reddit-logo" style="max-width: 64px;">
-            <div class="content">
+            <div class="column">
                 <h3>WE HATE REDDIT!!!!</h3>
                 <h3>YEAH!!! FUCK REDDIT</h3>
             </div>

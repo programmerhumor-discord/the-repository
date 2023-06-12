@@ -40,10 +40,26 @@
         const username = prompt('whats your username ?')
         document.querySelector('#username').textContent += username
 
+        text.addEventListener("keypress", function (event)
+        {
+            // If the user presses the "Enter" key on the keyboard
+            if (event.key === "Enter")
+            {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                sendBtn.click()
+            }
+        })
+
+        sendBtn.addEventListener('click', () => {
+            textarea.value += `${username}: ${text.value}` + '\n'
+        })
+        
         peer.on('open', async (yourID) =>
         {
             console.log('ID: ' + yourID)
-            chatroomUrl.textContent = `${window.location.host}?id=${yourID}`
+            chatroomUrl.textContent = `${window.location.href}?id=${yourID}`
 
             chatroomUrl.addEventListener('click', async () =>
             {
@@ -59,13 +75,11 @@
                     sendBtn.addEventListener('click', () =>
                     {
                         connection.send(`${username}: ${text.value}`)
-                        textarea.value += `${username}: ${text.value}` + '\n'
                         text.value = ''
                     })
                 })
                 connection.on('close', () =>
                 {
-                    alert('HOST CLOSED THE CONNECTION')
                     console.log('CONNECTION CLOSED BY PEER')
                 })
                 connection.on('error', (e) => console.log('CONNECTION ERRORED ' + e))
@@ -83,7 +97,6 @@
                 sendBtn.addEventListener('click', async () =>
                 {
                     connection.send(`${username}: ${text.value}`)
-                    textarea.value += `${username}: ${text.value}` + '\n'
                     text.value = ''
                 })
 
@@ -94,7 +107,6 @@
             })
             connection.on('close', () =>
             {
-                alert('HOST CLOSED THE CONNECTION')
                 console.log('CONNECTION CLOSED BY PEER')
             })
             connection.on('error', (e) => console.log('CONNECTION ERRORED ' + e))

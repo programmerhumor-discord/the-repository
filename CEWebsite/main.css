@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+body {
+	color: #fff;
+	background-color: #000;
+	font-family: 'Fira Code';
+}
+
+iframe {
+	width: 90%;
+	height: 50vh;
+	position: relative;
+	left: 5%;
+}
+#josg {
+	color: red;
+	height: 0;
+}

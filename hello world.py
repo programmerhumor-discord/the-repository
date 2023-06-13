@@ -40,16 +40,16 @@ class exclamation:
 class Program:
     def __init__(self):
         # Initialize instances of each letter class
-                                            self.H = H()  # Create an instance of the letter 'H'
-                                        self.e = e()  # Create an instance of the letter 'e'
-                                    self.l1 = l()  # Create an instance of the letter 'l'
-                            self.l2 = l()  # Create another instance of the letter 'l'
-                            self.o = o()  # Create an instance of the letter 'o'
-                                self.space = space()  # Create an instance of a space
-                                    self.w = w()  # Create an instance of the letter 'w'
-                                        self.r = r()  # Create an instance of the letter 'r'
-                                            self.d = d()  # Create an instance of the letter 'd'
-                                                self.exclamation = exclamation()  # Create an instance of an exclamation mark
+        self.H = H();  # Create an instance of the letter 'H'
+        self.e = e()  # Create an instance of the letter 'e'
+        self.l1 = l()  # Create an instance of the letter 'l'
+        self.l2 = l()  # Create another instance of the letter 'l'
+        self.o = o()  # Create an instance of the letter 'o'
+        self.space = space()  # Create an instance of a space
+        self.w = w()  # Create an instance of the letter 'w'
+        self.r = r()  # Create an instance of the letter 'r'
+        self.d = d()  # Create an instance of the letter 'd'
+        self.exclamation = exclamation()  # Create an instance of an exclamation mark
 
     def __str__(self):
         # Concatenate the letters to form the desired output

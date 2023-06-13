@@ -15,6 +15,7 @@ To:
 > - `EpicZombieSlayer` (he didn't do anything i just thought it would be funny to credit him)
 > - For watching.
 > - `Elijah629` for vercel-site and operating-system
+> - `vaporii` (she also didn't do anything and thought it would be funny to credit her)
 
 ## Branch navigation
 Use this easy to navigate this repo.

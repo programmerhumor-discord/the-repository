@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"dev": "next dev --turbo --show-all",
+		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint:next": "next lint",
@@ -9,15 +9,13 @@
 		"lint": "concurrently \"npm:lint:*\""
 	},
 	"dependencies": {
-		"cls": "^0.1.5",
+		"@headlessui/react": "^1.7.15",
+		"@tabler/icons-react": "^2.22.0",
 		"clsx": "^1.2.1",
-		"ioredis": "^5.3.2",
-		"net": "^1.0.2",
 		"next": "^13.4.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"redis": "^4.6.7",
-		"tls": "^0.0.1"
+		"redis": "^4.6.7"
 	},
 	"devDependencies": {
 		"@types/node": "^20.2.5",

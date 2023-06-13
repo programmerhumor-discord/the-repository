@@ -10,17 +10,9 @@ const nextConfig = {
 			}
 		]
 	},
-	headers: () => [
-		{
-			source: '/:path*',
-			headers: [
-				{
-					key: 'Cache-Control',
-					value: 'no-store',
-				},
-			],
-		},
-	],
+	experimental: {
+		serverActions: true
+	}
 };
 
 module.exports = nextConfig;

@@ -1,76 +1,125 @@
 "use client";
 
-import { useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { IconPlus } from "@tabler/icons-react";
+import { Fragment, useState } from "react";
+
+const inputState = <T,>(
+	stateFunction: React.Dispatch<React.SetStateAction<T>>
+) => {
+	return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		stateFunction(e.target.value as T);
+	};
+};
 
 export function MessageForm() {
-    const [username, setUsername] = useState('');
-    const [message, setMessage] = useState('');
-    const [submitting, setSubmitting] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const [username, setUsername] = useState<string>();
+	const [message, setMessage] = useState<string>();
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        setSubmitting(true);
-        e.preventDefault();
+	return (
+		<div>
+			<button
+				className="btn-neutral btn"
+				onClick={() => setIsOpen(true)}>
+				<IconPlus className="h-5 w-5" />
+				Post
+			</button>
+			<Transition
+				show={isOpen}
+				as={Fragment}>
+				<Dialog
+					// initialFocus={focusRef}
+					onClose={() => setIsOpen(false)}
+					className="relative z-50">
+					{/* The backdrop, rendered as a fixed sibling to the panel container */}
+					<Transition.Child
+						as={Fragment}
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0">
+						<div
+							className="fixed inset-0 bg-black/30"
+							aria-hidden="true"
+						/>
+					</Transition.Child>
 
-        try {
-            console.log(username, message);
-            const response = await fetch('/api/postMessage', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, message }),
-            });
+					{/* Full-screen container */}
+					<div className="fixed inset-0 flex items-center justify-center p-4">
+						{/* The actual dialog panel  */}
+						<Transition.Child
+							as={Fragment}
+							enter="ease-out duration-300"
+							enterFrom="opacity-0 scale-95"
+							enterTo="opacity-100 scale-100"
+							leave="ease-in duration-200"
+							leaveFrom="opacity-100 scale-100"
+							leaveTo="opacity-0 scale-95">
+							<Dialog.Panel className="card max-h-full w-full max-w-md overflow-auto rounded-md bg-neutral text-primary-content">
+								<div className="card-body">
+									<Dialog.Title className="card-title text-neutral-content">
+										New Post
+									</Dialog.Title>
+									<div className="form-control">
+										<label className="label">
+											<span className="label-text">
+												Username
+											</span>
+										</label>
+										<input
+											className="input"
+											maxLength={10}
+											onChange={inputState(setUsername)}
+										/>
+									</div>
+									<div className="form-control">
+										<label className="label">
+											<span className="label-text">
+												Message
+											</span>
+										</label>
+										<textarea
+											className="textarea"
+											maxLength={150}
+											onChange={inputState(setMessage)}
+										/>
+									</div>
 
-            if (response.ok) {
-                console.log('Message sent successfully!');
-                // Reset the form
-                setUsername('');
-                setMessage('');
-            } else {
-                console.error('Failed to send api.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-
-        await new Promise(r => setTimeout(r, 1300));
-
-        location.reload();
-
-        setSubmitting(false);
-    };
-
-    return (
-        <div className='border rounded-md w-96 p-5 mt-4 mb-5'>
-            <h2 className='text-xl font-medium ml-2 mt-2 mb-4'>Leave a message</h2>
-            <form onSubmit={handleSubmit}>
-                <div className='ml-2'>
-                    <label htmlFor="username"><b>Username</b></label><br/>
-                    <input
-                        name="username"
-                        type="text"
-                        id="username"
-                        placeholder='Username'
-                        required
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        className='p-2 mt-2 border border-gray-200 bg-base-100 rounded-md focus:outline-offset-2 focus:outline-gray-400 outline-none transition-all'
-                    /><br/>
-                    <div className='mt-2'>
-                        <label htmlFor="message"><b>Message</b></label><br/>
-                        <textarea
-                            name="message"
-                            id="message"
-                            placeholder='Message'
-                            required
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className='p-2 mt-2 w-69 border border-gray-200 bg-base-100 rounded-md focus:outline-offset-2 focus:outline-gray-400 outline-none transition-all'
-                        />
-                    </div>
-                </div>
-                <button type="submit" disabled={submitting} className='border border-blue-500 rounded-md px-4 py-2 m-2'>Submit</button>
-            </form>
-        </div>
-    )
+									<div className="card-actions justify-end">
+										<button
+											className="btn"
+											onClick={() => {
+												fetch("/api/message", {
+													method: "POST",
+													headers: {
+														"Content-Type":
+															"application/json"
+													},
+													body: JSON.stringify({
+														username,
+														message
+													})
+												});
+												setIsOpen(false);
+											}}>
+											<IconPlus className="h-5 w-5" />
+											Post
+										</button>
+										<button
+											className="btn-error btn"
+											onClick={() => setIsOpen(false)}>
+											Cancel
+										</button>
+									</div>
+								</div>
+							</Dialog.Panel>
+						</Transition.Child>
+					</div>
+				</Dialog>
+			</Transition>
+		</div>
+	);
 }

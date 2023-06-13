@@ -1,4 +1,7 @@
 import { DestroyButton } from "@/components/DestroyButton";
+import { MessageBoard } from "@/components/MessageBoard";
+
+import { GetAllMessages } from "@/app/redis";
 
 export default function Home() {
 	return (
@@ -18,6 +21,7 @@ export default function Home() {
 				</code>
 			</section>
 			<DestroyButton />
+			<MessageBoard />
 		</>
 	);
 }

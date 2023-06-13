@@ -72,6 +72,7 @@ export function MessageForm() {
 										<input
 											className="input"
 											maxLength={10}
+											required
 											onChange={inputState(setUsername)}
 										/>
 									</div>
@@ -84,13 +85,14 @@ export function MessageForm() {
 										<textarea
 											className="textarea"
 											maxLength={150}
+											required
 											onChange={inputState(setMessage)}
 										/>
 									</div>
 
 									<div className="card-actions justify-end">
 										<button
-											className="btn"
+											className="btn-primary btn"
 											onClick={() => {
 												fetch("/api/message", {
 													method: "POST",

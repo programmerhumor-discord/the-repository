@@ -25,3 +25,4 @@ Use this easy to navigate this repo.
 | [vercel website](https://github.com/programmerhumor-discord/the-repository/tree/vercel-site)         | a shitter version of the site? |
 | [operasting system](https://github.com/programmerhumor-discord/the-repository/tree/operating-system) | a what even the fuck os!?      |
 | [`Ducks/`](https://github.com/programmerhumor-discord/the-repository/tree/main/Ducks)                | A home for ducks. **Ducks only**. |
+| [Useless code](https://github.com/programmerhumor-discord/the-repository/tree/uselesscode)           | A place for all of your "codes" |

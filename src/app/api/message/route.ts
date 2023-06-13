@@ -2,16 +2,15 @@ import { create_message } from "@/message-board/redis";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-	const { username, message } = await request.json();
-
-	if (
-		!username ||
-		!message ||
-		username.toString().trim() === "" ||
-		message.toString().trim() === ""
-	) {
+	let { username = "", message = "" } = await request.json();
+	username = String(username).trim();
+	message = String(message).trim();
+	
+	if (!username || !message) {
 		return NextResponse.json({
 			message: "No message or username specified"
+		}, {
+			status: 400
 		});
 	}
 

@@ -3,6 +3,7 @@ export const fetchCache = "force-no-store";
 export const revalidate = 0;
 
 import { DestroyButton } from "@/components/DestroyButton";
+import Link from "next/link";
 
 export default function Home() {
 	return (
@@ -21,6 +22,13 @@ export default function Home() {
 					</pre>
 				</code>
 			</section>
+
+			<div className="divider">LINKS</div>
+			<Link
+				href="/message-board"
+				className="btn-primary btn-lg btn">
+				Public message board ( twitter )
+			</Link>
 			<DestroyButton />
 		</>
 	);

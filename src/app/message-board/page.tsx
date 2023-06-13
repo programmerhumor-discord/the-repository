@@ -25,5 +25,4 @@ export default async function MessageBoard() {
 			</div>
 		</>
 	);
-	// return <></>;
 }

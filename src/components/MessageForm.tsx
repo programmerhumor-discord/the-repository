@@ -8,8 +8,6 @@ export function MessageForm() {
     const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        console.log("called");
-        e.preventDefault();
         setSubmitting(true);
 
         try {

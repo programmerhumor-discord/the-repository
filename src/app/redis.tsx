@@ -1,3 +1,7 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 import Redis from "ioredis";
 
 export async function StoreMessage(username: string, message: string) {
@@ -5,8 +9,15 @@ export async function StoreMessage(username: string, message: string) {
     console.log("[*] Connected to Redis DB!")
     
     const keys = await client.keys("*");
-    keys.sort((a, b) => {
-        return (a ?? "").localeCompare(b ?? "");
+    keys.sort((a: string, b: string) => {
+        const aKey = a;
+        const bKey = b;
+        if (aKey === null || bKey === null) {
+            return 0;
+        }
+        const aKeyNumber = parseInt(aKey);
+        const bKeyNumber = parseInt(bKey);
+        return aKeyNumber > bKeyNumber ? 1 : -1;
     });
     
     const latestKey = keys[keys.length - 1];
@@ -29,7 +40,6 @@ export async function GetAllMessages() {
     console.log("[*] Connected to Redis DB!")
 
     const keys = await client.keys("*");
-    console.log(keys)
     // create an array of pairs [key, value]
     const pairs = await Promise.all(
     keys.map(async (key: string) => {
@@ -38,14 +48,18 @@ export async function GetAllMessages() {
     })
     );
 
-    console.table(pairs);
-
     // sort the pairs by the key
-    pairs.sort((a, b) => {
-    return (a[0] ?? "").localeCompare(b[0] ?? "");
+    // the keys are strings, so we need to convert them to numbers
+    pairs.sort((a: (string | null)[], b: (string | null)[]) => {
+        const aKey = a[0];
+        const bKey = b[0];
+        if (aKey === null || bKey === null) {
+            return 0;
+        }
+        const aKeyNumber = parseInt(aKey);
+        const bKeyNumber = parseInt(bKey);
+        return aKeyNumber > bKeyNumber ? 1 : -1;
     });
-
-    console.table(pairs);
 
     // value is a json in the following format:
     // {
@@ -54,15 +68,13 @@ export async function GetAllMessages() {
     // }
     // parse the json
     const messages = pairs.map((pair: (string | null)[]) => {
-    const value = pair[1];
-    if (value === null) {
-        return null;
-    }
-    console.log(value);
-    return JSON.parse(value);
-    });
+        const value = pair[1];
+        if (value === null) {
+            return null;
+        }
 
-    console.table(messages);
+        return JSON.parse(value);
+    });
 
     // filter out null values
     return messages.filter((message: string | null) => {

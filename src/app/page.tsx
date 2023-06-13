@@ -1,3 +1,7 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
+
 import { DestroyButton } from "@/components/DestroyButton";
 import { MessageBoard } from "@/components/MessageBoard";
 

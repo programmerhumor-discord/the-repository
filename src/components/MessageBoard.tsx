@@ -1,30 +1,16 @@
-import { MessageForm } from "./MessageForm";
+export const dynamic = "force-dynamic";
+export const fetchCache = 'force-no-store';
+export const revalidate = 0;
 
 import { GetAllMessages } from "@/app/redis";
+import { MessageBoardDisplay } from "@/components/MessageBoardDisplay";
 
-export async function MessageBoard() { 
+export async function MessageBoard() {
     const messages = await GetAllMessages()
 
     return (
         <div>
-            <h1 className='text-3xl font-bold mt-4'>
-                Message Board
-            </h1>
-
-            <MessageForm />    
-
-            {messages.map((message, index) => {
-                return (
-                    <div key={index} className='border border-gray-200 w-full rounded-md p-5 mb-3'>
-                        <div className='text-2xl font-medium'>
-                            {message.username}:
-                        </div>
-                        <div>
-                            {message.message}
-                        </div>
-                    </div>
-                )
-            })}
+            <MessageBoardDisplay messages={messages} />
         </div>
     )
 }

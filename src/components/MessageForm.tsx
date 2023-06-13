@@ -9,6 +9,7 @@ export function MessageForm() {
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         setSubmitting(true);
+        e.preventDefault();
 
         try {
             console.log(username, message);
@@ -31,6 +32,10 @@ export function MessageForm() {
         } catch (error) {
             console.error('Error:', error);
         }
+
+        await new Promise(r => setTimeout(r, 1300));
+
+        location.reload();
 
         setSubmitting(false);
     };

@@ -1,28 +1,30 @@
-export async function MessageBoard(props: {
-    messages: {
-        username: string;
-        message: string;
-    }[],
-}) { 
+import { MessageForm } from "./MessageForm";
+
+import { GetAllMessages } from "@/app/redis";
+
+export async function MessageBoard() { 
+    const messages = await GetAllMessages()
+
     return (
-        <div>   
-            <h1>Message Board</h1>
-            {props.messages.map((message, index) => {
+        <div>
+            <h1 className='text-3xl font-bold mt-4'>
+                Message Board
+            </h1>
+
+            <MessageForm />    
+
+            {messages.map((message, index) => {
                 return (
-                    <div key={index}>
-                        <div>{message.username}</div>
-                        <div>{message.message}</div>
+                    <div key={index} className='border border-gray-200 w-full rounded-md p-5 mb-3'>
+                        <div className='text-2xl font-medium'>
+                            {message.username}:
+                        </div>
+                        <div>
+                            {message.message}
+                        </div>
                     </div>
                 )
             })}
-            <h2>Leave a message</h2>
-            <form action="/message" method="POST">
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="username" />
-                <label htmlFor="message">Message</label>
-                <input type="text" name="message" id="message" />
-                <button type="submit">Submit</button>
-            </form>
         </div>
     )
 }

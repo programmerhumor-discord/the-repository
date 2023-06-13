@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body {
+    background: #5b2f5c;
+}
+
+.card {
+    position: absolute;
+    top: calc(50% - 400px);
+    left: calc(50% - 150px);
+
+    width: 300px;
+    height: 450px;
+
+    text-align: center;
+    line-height: 450px;
+
+    font-size: 50px;
+    font-family: 'Raleway', sans-serif;
+
+    color: white;
+    transition: .55s cubic-bezier(.6, -0.35, 0, 1);
+    transform-origin: bottom;
+    border-radius: 25px;
+    box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.288);
+    cursor: pointer;
+    animation: scaleout 0.3s cubic-bezier(.33, .1, .33, .99);
+}
+
+.scaleout {
+    animation: scaleout 0.3s cubic-bezier(.33, .1, .33, .99);
+}
+
+.scalein {
+    animation: scalein 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.card4 {
+    background-color: #6DA6D8;
+    transform: translate(25px, 4px) rotate(4deg);
+    box-shadow: -10px 0 10px 0 rgba(0, 0, 0, 0.288), 0 0 3px 1px white inset;
+}
+
+.card3 {
+    background-color: #62c2bf;
+    transform: translateX(6px) rotate(1deg);
+}
+
+.card2 {
+    background-color: #ebb4d1;
+    transform: translateX(-6px) rotate(-1deg);
+}
+
+.card1 {
+    background-color: #497091;
+    transform: translate(-25px, 4px) rotate(-4deg);
+}
+
+.container {
+    border: 1px solid black;
+}
+
+.container:hover .card4 {
+    transform: translate(175px, 20px) rotate(25deg);
+}
+
+.container:hover .card3 {
+    transform: translateX(75px) rotate(6deg);
+}
+
+.container:hover .card2 {
+    transform: translateX(-75px) rotate(-8deg);
+}
+
+.container:hover .card1 {
+    transform: translate(-175px, 20px) rotate(-25deg);
+}
+
+.container:hover .card {
+    animation: scalein 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes scalein {
+    40% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 0.8;
+    }
+}
+
+@keyframes scaleout {
+    100% {
+        scale: 1;
+    }
+
+    0% {
+        scale: 0.8;
+    }
+}

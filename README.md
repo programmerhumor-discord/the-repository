@@ -10,11 +10,9 @@ By accessing this repository through `git` you can earn MLM benchmarks.
 
 ## Thx
 To:
-> - `D-u-c-k-s-e-l`
 > - `programmerhumor-discord`
 > - `EpicZombieSlayer` (he didn't do anything i just thought it would be funny to credit him)
 > - For watching.
-> - `Elijah629` for vercel-site and operating-system
 > - `vaporii` (she also didn't do anything and thought it would be funny to credit her)
 
 ## Branch navigation

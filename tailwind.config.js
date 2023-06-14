@@ -25,9 +25,9 @@ module.exports = {
 	theme: {
 		extend: {
 			width: {
-				'68': '17rem',
-				'69': '17.25rem',
-				'70': '17.5rem',
+				68: "17rem",
+				69: "17.25rem",
+				70: "17.5rem"
 			},
 			fontFamily: {
 				sans: "'Inter', 'Roboto', sans-serif"

@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 		}, {
 			status: 400
 		});
-	}
+``	}
 
 	create_message(username, message);
 	return NextResponse.json({ ok: true, errors: [] });

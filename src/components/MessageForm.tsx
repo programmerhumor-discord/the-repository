@@ -1,5 +1,6 @@
 "use client";
 
+import { Message } from "@/message-board/redis";
 import { Dialog, Transition } from "@headlessui/react";
 import { IconPlus } from "@tabler/icons-react";
 import { Fragment, useState } from "react";
@@ -12,7 +13,11 @@ const inputState = <T,>(
 	};
 };
 
-export function MessageForm() {
+interface MessageFormProps {
+	addMessage: (message: Message) => void;
+}
+
+export function MessageForm(props: MessageFormProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [username, setUsername] = useState<string>();
 	const [message, setMessage] = useState<string>();
@@ -72,6 +77,7 @@ export function MessageForm() {
 										<input
 											className="input"
 											maxLength={10}
+											required
 											onChange={inputState(setUsername)}
 										/>
 									</div>
@@ -84,25 +90,35 @@ export function MessageForm() {
 										<textarea
 											className="textarea"
 											maxLength={150}
+											required
 											onChange={inputState(setMessage)}
 										/>
 									</div>
 
 									<div className="card-actions justify-end">
 										<button
-											className="btn"
+											className="btn-primary btn"
 											onClick={() => {
+												const msg: Message = {
+													username: username!.trim(),
+													message: message!.trim()
+												};
+
+												if (!username || !message) {
+													return;
+												}
+
 												fetch("/api/message", {
 													method: "POST",
 													headers: {
 														"Content-Type":
 															"application/json"
 													},
-													body: JSON.stringify({
-														username,
-														message
-													})
+													body: JSON.stringify(msg)
 												});
+												props.addMessage(msg);
+												setMessage("");
+												setUsername("");
 												setIsOpen(false);
 											}}>
 											<IconPlus className="h-5 w-5" />

@@ -5,7 +5,7 @@ export async function POST(request: Request) {
 	let { username = "", message = "" } = await request.json();
 	username = String(username).trim();
 	message = String(message).trim();
-	const errors = []
+	const errors: string[] = []
 	
 	if (!username) errors.push("No username specified.")
 	if (!message) errors.push("No message specified.")

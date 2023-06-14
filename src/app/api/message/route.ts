@@ -5,15 +5,21 @@ export async function POST(request: Request) {
 	let { username = "", message = "" } = await request.json();
 	username = String(username).trim();
 	message = String(message).trim();
+	const errors = []
 	
-	if (!username || !message) {
+	if (!username) errors.push("No username specified.")
+	if (!message) errors.push("No message specified.")
+	if (username.length > 10) errors.push("Username is too long, max 10 characters.")
+	if (username.length > 150) errors.push("Username is too long, max 150 characters.")
+	if (errors.length) {
 		return NextResponse.json({
-			message: "No message or username specified"
+			ok: false,
+			errors
 		}, {
 			status: 400
 		});
 	}
 
-	create_message(username.substring(0, 10), message.substring(0, 150));
-	return NextResponse.json({ message: "OK" });
+	create_message(username, message);
+	return NextResponse.json({ ok: true, errors: [] });
 }

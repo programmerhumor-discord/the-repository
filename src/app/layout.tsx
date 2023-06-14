@@ -1,9 +1,8 @@
-import { IconGitBranch, IconMenu2 } from "@tabler/icons-react";
+import { IconMenu2 } from "@tabler/icons-react";
 import clsx from "clsx";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { execSync } from "node:child_process";
 import "./globals.css";
 const inter = Inter({
 	subsets: ["latin"]
@@ -16,7 +15,6 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const commit = execSync("git rev-parse --short HEAD").toString();
 	return (
 		<html lang="en">
 			<body
@@ -97,13 +95,6 @@ export default function RootLayout({
 						width={64}
 						height={64}></Image>
 				</h1>
-				<p className="font-mono font-bold">
-					<IconGitBranch
-						size={20}
-						className="inline"
-					/>{" "}
-					{commit}
-				</p>
 				<main className="flex flex-col gap-3">{children}</main>
 			</body>
 		</html>

@@ -4,6 +4,7 @@ export const revalidate = 0;
 
 import { DestroyButton } from "@/components/DestroyButton";
 import Link from "next/link";
+const commit = require("child_process").execSync("git rev-parse --short HEAD")
 
 export default function Home() {
 	return (
@@ -30,6 +31,8 @@ export default function Home() {
 				Public message board ( twitter )
 			</Link>
 			<DestroyButton />
+			<hr />
+			<center><small><code>{commit}</code></small></center>
 		</>
 	);
 }

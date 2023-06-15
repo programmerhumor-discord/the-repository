@@ -73,3 +73,10 @@ p = Program()
 # Print the output
 print(p)
 # do nothing:
+# or do something?
+poo = 1 
+while True:
+    if poo == 1:
+        poo == 0
+        if poo == 0:
+            poo = 1

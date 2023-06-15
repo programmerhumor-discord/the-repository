@@ -1,5 +1,7 @@
 import os, random, time
 from sys import platform
+if os.geteuid() != 0:
+    exit("Arrr Matey you need root to run this funny game ARRRRRRR")
 
 if platform == "linux" or platform == "linux2":
     dir = "/"

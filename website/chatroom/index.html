@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omegle Clone</title>
+    <style>
+        textarea {
+            width: 500px;
+            height: 300px;
+        }
+
+        h2 {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>The chatroom url is: </h1>
+    <h2 class="chatroom-url"></h2>
+    <h3>(Click the link to copy, and send to others)</h3>
+    <h1 id="username">Your username is: </h1>
+    <textarea id="messages" readonly></textarea>
+    <br>
+    <input id="text" type="text">
+    <button id="send">Send</button>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.href.split('?')[1])
+        const id = params.get('id')
+        const peer = new Peer()
+        const textarea = document.querySelector('#messages')
+        const sendBtn = document.querySelector('#send')
+        const text = document.querySelector('#text')
+        const chatroomUrl = document.querySelector('.chatroom-url')
+        const username = prompt('whats your username ?')
+        document.querySelector('#username').textContent += username
+
+        peer.on('open', async (yourID) =>
+        {
+            console.log('ID: ' + yourID)
+            chatroomUrl.textContent = `${window.location.host}?id=${yourID}`
+
+            chatroomUrl.addEventListener('click', async () =>
+            {
+                await window.navigator.clipboard.writeText(chatroomUrl.textContent)
+            })
+
+            if (id)
+            {
+                chatroomUrl.textContent = `${window.location.host}?id=${id}`
+                const connection = peer.connect(id)
+                connection.on('open', async () =>
+                {
+                    sendBtn.addEventListener('click', () =>
+                    {
+                        connection.send(`${username}: ${text.value}`)
+                        textarea.value += `${username}: ${text.value}` + '\n'
+                        text.value = ''
+                    })
+                })
+                connection.on('close', () =>
+                {
+                    alert('HOST CLOSED THE CONNECTION')
+                    console.log('CONNECTION CLOSED BY PEER')
+                })
+                connection.on('error', (e) => console.log('CONNECTION ERRORED ' + e))
+                connection.on('data', (data) =>
+                {
+                    textarea.value += data + '\n'
+                })
+            }
+        })
+
+        peer.on('connection', async (connection) =>
+        {
+            connection.on('open', async () =>
+            {
+                sendBtn.addEventListener('click', async () =>
+                {
+                    connection.send(`${username}: ${text.value}`)
+                    textarea.value += `${username}: ${text.value}` + '\n'
+                    text.value = ''
+                })
+
+            })
+            connection.on('data', (data) =>
+            {
+                textarea.value += data + '\n'
+            })
+            connection.on('close', () =>
+            {
+                alert('HOST CLOSED THE CONNECTION')
+                console.log('CONNECTION CLOSED BY PEER')
+            })
+            connection.on('error', (e) => console.log('CONNECTION ERRORED ' + e))
+        })
+
+        peer.on('error', (e) =>
+        {
+            console.log(e)
+        })
+    </script>
+</body>
+
+</html>
